@@ -2,13 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Anime Tamil Hub</title>
+  <title>Zathrans Hub | Z-Hub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    *{
-      box-sizing:border-box;
-    }
+    *{ box-sizing:border-box; }
 
     body{
       margin:0;
@@ -26,7 +24,7 @@
       padding:10px;
       display:flex;
       align-items:center;
-      gap:10px;
+      gap:12px;
     }
 
     .logo{
@@ -35,6 +33,19 @@
       font-size:18px;
       white-space:nowrap;
     }
+
+    .nav{
+      display:flex;
+      gap:12px;
+    }
+
+    .nav a{
+      color:#cbd5e1;
+      text-decoration:none;
+      font-size:14px;
+    }
+
+    .nav a:hover{ color:#fff; }
 
     .search{
       flex:1;
@@ -49,18 +60,16 @@
       font-size:14px;
     }
 
-    .menu{
-      color:#fff;
-      font-size:22px;
-      cursor:pointer;
-      padding:4px 8px;
-    }
-
     /* ===== CONTENT ===== */
     .container{
       max-width:900px;
       margin:auto;
       padding:20px;
+    }
+
+    h1{
+      font-size:22px;
+      margin-bottom:15px;
     }
 
     .card{
@@ -102,22 +111,6 @@
       font-size:14px;
     }
 
-    .btn{
-      display:inline-block;
-      margin-top:12px;
-      padding:8px 14px;
-      border:1px solid #0284c7;
-      color:#0284c7;
-      text-decoration:none;
-      border-radius:5px;
-      font-size:14px;
-    }
-
-    .btn:hover{
-      background:#0284c7;
-      color:#fff;
-    }
-
     footer{
       text-align:center;
       padding:15px;
@@ -131,45 +124,65 @@
 
 <!-- ===== TOP BAR ===== -->
 <div class="topbar">
-  <div class="logo">ANIME TAMIL HUB</div>
+  <div class="logo">Z-Hub</div>
 
-  <div class="search">
-    <input type="text" placeholder="Search anime, movies...">
+  <div class="nav">
+    <a href="index.html">Home</a>
+    <a href="anime.html">Anime</a>
+    <a href="webseries.html">Web Series</a>
+    <a href="movies.html">Movies</a>
   </div>
 
-  <div class="menu">☰</div>
+  <div class="search">
+    <input type="text" placeholder="Search anime, movies, series...">
+  </div>
 </div>
 
 <!-- ===== CONTENT ===== -->
 <div class="container">
+  <h1>Recently Added (Last 7 Days)</h1>
 
-  <div class="card">
+  <!-- CARD 1 (RECENT) -->
+  <div class="card" data-date="2025-12-28">
     <img src="https://i.imgur.com/8JQ9QZB.jpg" alt="Anime Poster">
-
     <div class="content">
       <span class="tag anime">ANIME</span>
       <span class="tag tamil">TAMIL DUB</span>
+      <h2>Isekai Adventure</h2>
+      <p class="meta">Added: Dec 28, 2025</p>
+    </div>
+  </div>
 
-      <h2>A Gatherer’s Adventure in Isekai Tamil</h2>
-
-      <p class="meta">
-        Type: TV · Episodes: 12 · Status: Ongoing
-      </p>
-
-      <p>
-        A fantasy adventure anime where survival depends on wit,
-        skills, and unexpected luck.
-      </p>
-
-      <a href="#" class="btn">READ MORE</a>
+  <!-- CARD 2 (OLD – WILL HIDE) -->
+  <div class="card" data-date="2025-12-15">
+    <img src="https://i.imgur.com/8JQ9QZB.jpg" alt="Anime Poster">
+    <div class="content">
+      <span class="tag anime">ANIME</span>
+      <h2>Old Anime Title</h2>
+      <p class="meta">Added: Dec 15, 2025</p>
     </div>
   </div>
 
 </div>
 
 <footer>
-  © 2025 Anime Tamil Hub · Info only
+  © 2025 Zathrans Hub (Z-Hub) · Info only
 </footer>
+
+<!-- ===== SCRIPT ===== -->
+<script>
+  const cards = document.querySelectorAll(".card");
+  const today = new Date();
+
+  cards.forEach(card => {
+    const addedDate = new Date(card.dataset.date);
+    const diffDays = (today - addedDate) / (1000 * 60 * 60 * 24);
+
+    if (diffDays > 7) {
+      card.style.display = "none";
+    }
+  });
+</script>
 
 </body>
 </html>
