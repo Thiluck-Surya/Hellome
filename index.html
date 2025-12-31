@@ -11,8 +11,8 @@
     body{
       margin:0;
       font-family: Arial, sans-serif;
-      background:#f5f7fa;
-      color:#111;
+      background:#0f172a;
+      color:#e5e7eb;
     }
 
     /* ===== TOP BAR ===== */
@@ -20,64 +20,73 @@
       position:sticky;
       top:0;
       z-index:100;
-      background:#0b1220;
-      padding:10px;
+      background:#020617;
+      padding:12px 14px;
       display:flex;
       align-items:center;
-      gap:12px;
+      justify-content:space-between;
     }
 
     .logo{
-      color:#fff;
       font-weight:bold;
       font-size:18px;
-      white-space:nowrap;
+      color:#38bdf8;
     }
 
-    .nav{
-      display:flex;
-      gap:12px;
+    .menu-btn{
+      font-size:24px;
+      color:#e5e7eb;
+      cursor:pointer;
+      user-select:none;
     }
 
-    .nav a{
-      color:#cbd5e1;
+    /* ===== MENU PANEL ===== */
+    .menu{
+      position:fixed;
+      top:0;
+      right:-220px;
+      width:200px;
+      height:100%;
+      background:#020617;
+      padding:20px;
+      transition:0.3s;
+    }
+
+    .menu a{
+      display:block;
+      color:#e5e7eb;
       text-decoration:none;
-      font-size:14px;
+      padding:10px 0;
+      border-bottom:1px solid #1e293b;
+      font-size:15px;
     }
 
-    .nav a:hover{ color:#fff; }
-
-    .search{
-      flex:1;
+    .menu a:hover{
+      color:#38bdf8;
     }
 
-    .search input{
-      width:100%;
-      padding:8px 12px;
-      border-radius:4px;
-      border:none;
-      outline:none;
-      font-size:14px;
+    .menu.show{
+      right:0;
     }
 
     /* ===== CONTENT ===== */
     .container{
-      max-width:900px;
+      max-width:800px;
       margin:auto;
-      padding:20px;
+      padding:15px;
     }
 
     h1{
-      font-size:22px;
+      font-size:20px;
       margin-bottom:15px;
     }
 
     .card{
-      background:#fff;
+      background:#020617;
       border-radius:8px;
       overflow:hidden;
-      box-shadow:0 4px 10px rgba(0,0,0,.1);
-      margin-bottom:25px;
+      margin-bottom:20px;
+      box-shadow:0 4px 10px rgba(0,0,0,.6);
     }
 
     .card img{
@@ -86,36 +95,23 @@
     }
 
     .content{
-      padding:15px;
+      padding:12px;
     }
 
-    .tag{
-      display:inline-block;
-      font-size:12px;
-      padding:4px 8px;
-      border-radius:4px;
-      color:#fff;
-      margin-right:5px;
-    }
-
-    .anime{ background:#0284c7; }
-    .tamil{ background:#dc2626; }
-
-    h2{
-      margin:10px 0;
-      font-size:20px;
-    }
-
-    .meta{
-      color:#555;
-      font-size:14px;
+    .content a{
+      display:block;
+      color:#38bdf8;
+      text-decoration:none;
+      font-size:15px;
+      font-weight:bold;
+      margin-top:5px;
     }
 
     footer{
       text-align:center;
+      font-size:12px;
+      color:#94a3b8;
       padding:15px;
-      font-size:13px;
-      color:#666;
     }
   </style>
 </head>
@@ -125,63 +121,45 @@
 <!-- ===== TOP BAR ===== -->
 <div class="topbar">
   <div class="logo">Z-Hub</div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+</div>
 
-  <div class="nav">
-    <a href="index.html">Home</a>
-    <a href="anime.html">Anime</a>
-    <a href="webseries.html">Web Series</a>
-    <a href="movies.html">Movies</a>
-  </div>
-
-  <div class="search">
-    <input type="text" placeholder="Search anime, movies, series...">
-  </div>
+<!-- ===== SIDE MENU ===== -->
+<div class="menu" id="menu">
+  <a href="index.html">Home</a>
+  <a href="anime.html">Anime</a>
+  <a href="webseries.html">Web Series</a>
+  <a href="movies.html">Movies</a>
 </div>
 
 <!-- ===== CONTENT ===== -->
 <div class="container">
-  <h1>Recently Added (Last 7 Days)</h1>
+  <h1>Recently Added</h1>
 
-  <!-- CARD 1 (RECENT) -->
-  <div class="card" data-date="2025-12-28">
-    <img src="https://i.imgur.com/8JQ9QZB.jpg" alt="Anime Poster">
+  <div class="card">
+    <img src="https://i.imgur.com/8JQ9QZB.jpg">
     <div class="content">
-      <span class="tag anime">ANIME</span>
-      <span class="tag tamil">TAMIL DUB</span>
-      <h2>Isekai Adventure</h2>
-      <p class="meta">Added: Dec 28, 2025</p>
+      <a href="#">Anime / Movie Title 1</a>
     </div>
   </div>
 
-  <!-- CARD 2 (OLD – WILL HIDE) -->
-  <div class="card" data-date="2025-12-15">
-    <img src="https://i.imgur.com/8JQ9QZB.jpg" alt="Anime Poster">
+  <div class="card">
+    <img src="https://i.imgur.com/8JQ9QZB.jpg">
     <div class="content">
-      <span class="tag anime">ANIME</span>
-      <h2>Old Anime Title</h2>
-      <p class="meta">Added: Dec 15, 2025</p>
+      <a href="#">Anime / Movie Title 2</a>
     </div>
   </div>
 
 </div>
 
 <footer>
-  © 2025 Zathrans Hub (Z-Hub) · Info only
+  © 2025 Zathrans Hub (Z-Hub)
 </footer>
 
-<!-- ===== SCRIPT ===== -->
 <script>
-  const cards = document.querySelectorAll(".card");
-  const today = new Date();
-
-  cards.forEach(card => {
-    const addedDate = new Date(card.dataset.date);
-    const diffDays = (today - addedDate) / (1000 * 60 * 60 * 24);
-
-    if (diffDays > 7) {
-      card.style.display = "none";
-    }
-  });
+  function toggleMenu(){
+    document.getElementById("menu").classList.toggle("show");
+  }
 </script>
 
 </body>
