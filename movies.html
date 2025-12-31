@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Movies | Zathrans Hub (Z-Hub)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:#f5f7fa;
+      color:#111;
+    }
+
+    /* ===== TOP BAR ===== */
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:100;
+      background:#0b1220;
+      padding:10px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo{
+      color:#fff;
+      font-weight:bold;
+      font-size:18px;
+    }
+
+    .nav{
+      display:flex;
+      gap:12px;
+    }
+
+    .nav a{
+      color:#cbd5e1;
+      text-decoration:none;
+      font-size:14px;
+    }
+
+    .nav a:hover{ color:#fff; }
+
+    /* ===== CONTENT ===== */
+    .container{
+      max-width:900px;
+      margin:auto;
+      padding:20px;
+    }
+
+    h1{
+      font-size:22px;
+      margin-bottom:20px;
+    }
+
+    .movie-list{
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(160px, 1fr));
+      gap:15px;
+    }
+
+    .movie-card{
+      background:#fff;
+      border-radius:8px;
+      overflow:hidden;
+      box-shadow:0 4px 8px rgba(0,0,0,.1);
+      text-align:center;
+    }
+
+    .movie-card img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+    }
+
+    .movie-card a{
+      display:block;
+      padding:10px;
+      text-decoration:none;
+      color:#0284c7;
+      font-size:14px;
+      font-weight:bold;
+    }
+
+    /* ===== PAGINATION ===== */
+    .pagination{
+      display:flex;
+      justify-content:center;
+      margin:30px 0;
+    }
+
+    .pagination button{
+      padding:8px 16px;
+      border:none;
+      background:#0284c7;
+      color:#fff;
+      border-radius:5px;
+      cursor:pointer;
+      font-size:14px;
+    }
+
+    .pagination button:disabled{
+      background:#94a3b8;
+      cursor:not-allowed;
+    }
+
+    footer{
+      text-align:center;
+      padding:15px;
+      font-size:13px;
+      color:#666;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ===== TOP BAR ===== -->
+<div class="topbar">
+  <div class="logo">Z-Hub</div>
+
+  <div class="nav">
+    <a href="index.html">Home</a>
+    <a href="anime.html">Anime</a>
+    <a href="webseries.html">Web Series</a>
+    <a href="movies.html">Movies</a>
+  </div>
+</div>
+
+<!-- ===== CONTENT ===== -->
+<div class="container">
+  <h1>Movies (Newly Added First)</h1>
+
+  <div class="movie-list" id="movieList"></div>
+
+  <div class="pagination">
+    <button id="nextBtn">Next Page</button>
+  </div>
+</div>
+
+<footer>
+  © 2025 Zathrans Hub (Z-Hub)
+</footer>
+
+<!-- ===== SCRIPT ===== -->
+<script>
+  const movies = [
+    { title:"Movie 1", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#", date:"2025-12-30" },
+    { title:"Movie 2", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#", date:"2025-12-29" },
+    { title:"Movie 3", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#", date:"2025-12-28" },
+    { title:"Movie 4", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#", date:"2025-12-27" },
+    { title:"Movie 5", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#", date:"2025-12-26" },
+    { title:"Movie 6", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#", date:"2025-12-25" },
+    { title:"Movie 7", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#", date:"2025-12-24" }
+  ];
+
+  // newest first
+  movies.sort((a,b)=> new Date(b.date) - new Date(a.date));
+
+  const perPage = 5;
+  let page = 0;
+  const list = document.getElementById("movieList");
+  const nextBtn = document.getElementById("nextBtn");
+
+  function render(){
+    list.innerHTML = "";
+    const start = page * perPage;
+    const end = start + perPage;
+    const items = movies.slice(start, end);
+
+    items.forEach(m=>{
+      list.innerHTML += `
+        <div class="movie-card">
+          <img src="${m.img}">
+          <a href="${m.link}">${m.title}</a>
+        </div>`;
+    });
+
+    if(end >= movies.length){
+      nextBtn.disabled = true;
+    }
+  }
+
+  nextBtn.onclick = ()=>{
+    page++;
+    render();
+  };
+
+  render();
+</script>
+
+</body>
+</html>
