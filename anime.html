@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Anime | Zathrans Hub (Z-Hub)</title>
+  <title>Anime | Z-Hub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -11,8 +11,8 @@
     body{
       margin:0;
       font-family: Arial, sans-serif;
-      background:#f5f7fa;
-      color:#111;
+      background:#0f172a;
+      color:#e5e7eb;
     }
 
     /* ===== TOP BAR ===== */
@@ -20,125 +20,135 @@
       position:sticky;
       top:0;
       z-index:100;
-      background:#0b1220;
-      padding:10px;
+      background:#020617;
+      padding:12px 14px;
       display:flex;
+      justify-content:space-between;
       align-items:center;
-      gap:12px;
     }
 
     .logo{
-      color:#fff;
+      color:#38bdf8;
       font-weight:bold;
       font-size:18px;
     }
 
-    .nav{
-      display:flex;
-      gap:12px;
+    .menu-btn{
+      font-size:24px;
+      cursor:pointer;
     }
 
-    .nav a{
-      color:#cbd5e1;
+    /* ===== SIDE MENU ===== */
+    .menu{
+      position:fixed;
+      top:0;
+      right:-220px;
+      width:200px;
+      height:100%;
+      background:#020617;
+      padding:20px;
+      transition:.3s;
+    }
+
+    .menu a{
+      display:block;
+      color:#e5e7eb;
       text-decoration:none;
-      font-size:14px;
+      padding:10px 0;
+      border-bottom:1px solid #1e293b;
     }
 
-    .nav a:hover{ color:#fff; }
+    .menu.show{ right:0; }
 
     /* ===== CONTENT ===== */
     .container{
-      max-width:900px;
+      max-width:800px;
       margin:auto;
-      padding:20px;
+      padding:15px;
     }
 
     h1{
-      font-size:22px;
+      font-size:20px;
+      margin-bottom:15px;
+    }
+
+    .card{
+      background:#020617;
       margin-bottom:20px;
-    }
-
-    .anime-list{
-      display:grid;
-      grid-template-columns:repeat(auto-fill, minmax(160px, 1fr));
-      gap:15px;
-    }
-
-    .anime-card{
-      background:#fff;
       border-radius:8px;
       overflow:hidden;
-      box-shadow:0 4px 8px rgba(0,0,0,.1);
-      text-align:center;
+      box-shadow:0 4px 10px rgba(0,0,0,.6);
     }
 
-    .anime-card img{
+    .card img{
       width:100%;
-      height:220px;
-      object-fit:cover;
+      display:block;
     }
 
-    .anime-card a{
-      display:block;
-      padding:10px;
+    .content{
+      padding:12px;
+    }
+
+    .content a{
+      color:#38bdf8;
       text-decoration:none;
-      color:#0284c7;
-      font-size:14px;
+      font-size:15px;
       font-weight:bold;
     }
 
-    /* ===== PAGINATION ===== */
-    .pagination{
+    /* ===== NEXT PAGE ===== */
+    .next{
       display:flex;
       justify-content:center;
-      margin:30px 0;
+      margin:25px 0;
     }
 
-    .pagination button{
-      padding:8px 16px;
+    .next button{
+      padding:10px 20px;
       border:none;
-      background:#0284c7;
-      color:#fff;
-      border-radius:5px;
-      cursor:pointer;
+      border-radius:6px;
+      background:#38bdf8;
+      color:#020617;
       font-size:14px;
+      cursor:pointer;
     }
 
-    .pagination button:disabled{
-      background:#94a3b8;
+    .next button:disabled{
+      background:#475569;
       cursor:not-allowed;
     }
 
     footer{
       text-align:center;
+      font-size:12px;
+      color:#94a3b8;
       padding:15px;
-      font-size:13px;
-      color:#666;
     }
   </style>
 </head>
 
 <body>
 
-<!-- ===== TOP BAR ===== -->
+<!-- TOP BAR -->
 <div class="topbar">
   <div class="logo">Z-Hub</div>
-
-  <div class="nav">
-    <a href="index.html">Home</a>
-    <a href="anime.html">Anime</a>
-    <a href="webseries.html">Web Series</a>
-    <a href="movies.html">Movies</a>
-  </div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
 </div>
 
-<!-- ===== CONTENT ===== -->
+<!-- SIDE MENU -->
+<div class="menu" id="menu">
+  <a href="index.html">Home</a>
+  <a href="anime.html">Anime</a>
+  <a href="webseries.html">Web Series</a>
+  <a href="movies.html">Movies</a>
+</div>
+
+<!-- CONTENT -->
 <div class="container">
-  <h1>Anime (Newly Added First)</h1>
+  <h1>Anime (Newly Added)</h1>
+  <div id="list"></div>
 
-  <div class="anime-list" id="animeList"></div>
-
-  <div class="pagination">
+  <div class="next">
     <button id="nextBtn">Next Page</button>
   </div>
 </div>
@@ -147,41 +157,44 @@
   © 2025 Zathrans Hub (Z-Hub)
 </footer>
 
-<!-- ===== SCRIPT ===== -->
 <script>
-  const animes = [
-    { title:"Anime 1", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#", date:"2025-12-30" },
-    { title:"Anime 2", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#", date:"2025-12-29" },
-    { title:"Anime 3", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#", date:"2025-12-28" },
-    { title:"Anime 4", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#", date:"2025-12-27" },
-    { title:"Anime 5", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#", date:"2025-12-26" },
-    { title:"Anime 6", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#", date:"2025-12-25" },
-    { title:"Anime 7", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#", date:"2025-12-24" }
-  ];
+  function toggleMenu(){
+    document.getElementById("menu").classList.toggle("show");
+  }
 
-  // newest first
-  animes.sort((a,b)=> new Date(b.date) - new Date(a.date));
+  const data = [
+    {title:"Anime 1", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#"},
+    {title:"Anime 2", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#"},
+    {title:"Anime 3", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#"},
+    {title:"Anime 4", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#"},
+    {title:"Anime 5", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#"},
+    {title:"Anime 6", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#"},
+    {title:"Anime 7", img:"https://i.imgur.com/8JQ9QZB.jpg", link:"#"}
+  ];
 
   const perPage = 5;
   let page = 0;
-  const list = document.getElementById("animeList");
+  const list = document.getElementById("list");
   const nextBtn = document.getElementById("nextBtn");
 
   function render(){
     list.innerHTML = "";
     const start = page * perPage;
     const end = start + perPage;
-    const items = animes.slice(start, end);
+    const items = data.slice(start, end);
 
-    items.forEach(a=>{
+    items.forEach(item=>{
       list.innerHTML += `
-        <div class="anime-card">
-          <img src="${a.img}">
-          <a href="${a.link}">${a.title}</a>
-        </div>`;
+        <div class="card">
+          <img src="${item.img}">
+          <div class="content">
+            <a href="${item.link}">${item.title}</a>
+          </div>
+        </div>
+      `;
     });
 
-    if(end >= animes.length){
+    if(end >= data.length){
       nextBtn.disabled = true;
     }
   }
