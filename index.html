@@ -16,24 +16,77 @@
     header{
       background:#0b1220;
       color:#fff;
-      padding:15px;
+      padding:18px;
       text-align:center;
-      font-size:20px;
+      font-size:22px;
       font-weight:bold;
     }
 
     .container{
       max-width:900px;
       margin:auto;
+      padding:20px;
+    }
+
+    .card{
+      background:#fff;
+      border-radius:8px;
+      overflow:hidden;
+      box-shadow:0 4px 10px rgba(0,0,0,.1);
+      margin-bottom:25px;
+    }
+
+    .card img{
+      width:100%;
+      display:block;
+    }
+
+    .content{
       padding:15px;
     }
 
-    .post{
-      background:#fff;
-      margin-bottom:20px;
-      border-radius:6px;
+    .tag{
+      display:inline-block;
+      font-size:12px;
+      padding:4px 8px;
+      border-radius:4px;
+      color:#fff;
+      margin-right:5px;
+    }
+
+    .anime{ background:#0284c7; }
+    .tamil{ background:#dc2626; }
+
+    h2{
+      margin:10px 0;
+    }
+
+    .meta{
+      color:#555;
+      font-size:14px;
+    }
+
+    .btn{
+      display:inline-block;
+      margin-top:12px;
+      padding:8px 14px;
+      border:1px solid #0284c7;
+      color:#0284c7;
+      text-decoration:none;
+      border-radius:5px;
+      font-size:14px;
+    }
+
+    .btn:hover{
+      background:#0284c7;
+      color:#fff;
+    }
+
+    footer{
+      text-align:center;
       padding:15px;
-      box-shadow:0 2px 6px rgba(0,0,0,.1);
+      font-size:13px;
+      color:#666;
     }
   </style>
 </head>
@@ -45,12 +98,34 @@
 </header>
 
 <div class="container">
-  <div class="post">
-    <h2>A Gatherer’s Adventure in Isekai Tamil</h2>
-    <p>Type: TV · Episodes: 12 · Status: Ongoing</p>
-    <p>This is a test post. If you see this, your site works.</p>
+
+  <div class="card">
+    <img src="https://i.imgur.com/8JQ9QZB.jpg" alt="Anime Poster">
+
+    <div class="content">
+      <span class="tag anime">ANIME</span>
+      <span class="tag tamil">TAMIL DUB</span>
+
+      <h2>A Gatherer’s Adventure in Isekai Tamil</h2>
+
+      <p class="meta">
+        Type: TV · Episodes: 12 · Status: Ongoing
+      </p>
+
+      <p>
+        A fantasy adventure where a simple man enters a strange new world
+        and survives using skills, luck, and common sense.
+      </p>
+
+      <a href="#" class="btn">READ MORE</a>
+    </div>
   </div>
+
 </div>
+
+<footer>
+  © 2025 Anime Tamil Hub · Info only
+</footer>
 
 </body>
 </html>
